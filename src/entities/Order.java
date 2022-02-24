@@ -14,21 +14,29 @@ public class Order {
 
 	SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/YYYY HH:MM:ss");
 
-	Client client;
-	Product subb;
+	private Client client;
 	private List<OrderItem> items = new ArrayList<>();
 
 	public Order() {
 	}
 
-	public Order(Date moment, OrderStatus status) {
-
+	public Order(Date moment, OrderStatus status, Client client) {
+		super();
 		this.moment = moment;
 		this.status = status;
+		this.client = client;
 	}
 
 	public Date getMoment() {
 		return moment;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	public void setMoment(Date moment) {
@@ -66,13 +74,13 @@ public class Order {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		Date moment = new Date();
-		sb.append("Order moment: \n");
-		sb.append(sdf2.format(moment));
-		sb.append("Order status: " + OrderStatus.valueOf("PROCESSING") +"\n");
+		sb.append("Order moment: ");
+		sb.append(sdf2.format(moment) + "\n");
+		sb.append("Order status: " + OrderStatus.valueOf("PROCESSING") + "\n");
 		sb.append("Client: " + client + "\n");
-		sb.append("Order items: ");
+		sb.append("Order items: " + "\n");
 		for (OrderItem item : items) {
-			sb.append(item +"\n");
+			sb.append(item + "\n");
 		}
 		sb.append("Total Price: " + "\n");
 		sb.append(String.format("%.2f", total()));
